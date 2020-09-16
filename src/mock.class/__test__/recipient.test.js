@@ -1,4 +1,4 @@
-import Recipient from "../Recipient";
+import Recipient from "../recipient";
 
 describe("acceptInjection", () => {
   beforeEach(() => {
@@ -10,15 +10,13 @@ describe("acceptInjection", () => {
     jest.doMock("../covid19Vaccine", () => {
       return jest.fn().mockImplementation(() => {
         return {
-          composition: [],
+          composition: ["Sugar"],
         };
       });
     });
 
     const Covid19Vaccine = require("../covid19Vaccine");
-
     const recipient = new Recipient();
-
     recipient.acceptInjection(new Covid19Vaccine());
     expect(recipient.hasAntibodies).toBe(false);
   });
@@ -33,9 +31,7 @@ describe("acceptInjection", () => {
       });
     });
     const Covid19Vaccine = require("../covid19Vaccine");
-
     const recipient = new Recipient();
-
     recipient.acceptInjection(new Covid19Vaccine());
     expect(recipient.hasAntibodies).toBe(true);
   });
